@@ -1,40 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>surat cinta</title>
+<style>
+/* Style untuk popup */
+.popup {
+  /* display: none; Tetap sembunyikan saat pertama kali dimuat */
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5); /* Warna latar belakang yang gelap */
+}
+
+.popup-content {
+  background-color: #fff;
+  width: 300px;
+  margin: 200px auto; /* Atur posisi popup di tengah layar */
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Tombol tutup popup */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
-    <h3></h3>
+    
+    <!-- kontent -->
+    <h1></h1>
     <img id="myImage" src="https://c.tenor.com/Z8ezUHZzcLoAAAAC/love.gif" alt="">
-    <h1 id="tanya">Maukah kamu jadi pacarku ???</h1>
-    <button id="btn_mau" onclick="sembunyikanGambar(this)">mau</button>
+    <button id="btn_mau" onclick="mau(this)">mau</button>
     <button id="btn_gamau" onclick="gamau(this)" style="position: absolute;">gak mau</button>
+    
+    
+    <!-- popup nama -->
+    <div id="myPopup" class="popup">
+      <div class="popup-content">
+        <h3>Hay Nama mu siapa ?</h3>
+        <form id="myForm">
+            <input type="text" id="nama" />
+            <button id="submitButton">Submit</button>
+          </form>
+      </div>
+    </div>
+
+
+    <!-- popup penutup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2></h2>
+        </div>
+    </div>
+
+
+
+
+
 </body>
-    <script>
-        nama = prompt('hay nama mu siapa ?');
-        var h1 = document.querySelector("h1");
-            h1.innerHTML = `${nama} mau jadi pacar ku nggak ?`;
-        var img = document.getElementById("myImage");
-            img.style.display = "none";
-        function gamau(id){
-            var mau = document.getElementById('btn_mau');
-            var i = Math.floor(Math.random() * 200) + 1;
-            var j = Math.floor(Math.random() * 100) + mau.offsetTop;
-            id.style.left = i + 'px';
-            id.style.top = j + 'px';
-        }
-        function sembunyikanGambar() {
-            var img = document.getElementById("myImage");
-                img.style.display = "";
-            var btn_gamau = document.getElementById("btn_gamau");
-                btn_gamau.style.display = "none";
-            var btn_mau = document.getElementById("btn_mau");
-                btn_mau.style.display = "none";
-            var tanya = document.getElementById("tanya");
-                tanya.style.display = "none";
-            alert(`Makasih ${nama} cantik !!`)
-        }
-    </script>
+<script>
+    // hiden tampilan saat awal
+    const img = document.getElementById("myImage");
+        img.style.display = "none";
+    const btn_gamau = document.getElementById("btn_gamau");
+        btn_gamau.style.display = "none";
+    const btn_mau = document.getElementById("btn_mau");
+        btn_mau.style.display = "none";
+    const popup = document.getElementById("popup");
+        popup.style.display = "none";
+
+    var nama;
+    // form
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Mencegah aksi submit default
+
+        // Lakukan operasi lainnya di sini
+        nama = document.getElementById("nama").value; //ambil nilai dari form
+        const h1 = document.querySelector('h1');
+        h1.innerHTML = `${nama} mau jadi pacarku nggak ?`;
+
+        // tutup popup
+        const myPopup = document.getElementById("myPopup");
+        myPopup.style.display = "none";
+
+        // munculkan tombol
+        const btn_gamau = document.getElementById("btn_gamau");
+            btn_gamau.style.display = "block";
+        const btn_mau = document.getElementById("btn_mau");
+            btn_mau.style.display = "block";
+    });
+
+    // 
+    function gamau(id){
+        const mau = document.getElementById('btn_mau');
+        let i = Math.floor(Math.random() * 200) + 1;
+        let j = Math.floor(Math.random() * 100) + mau.offsetTop;
+        id.style.left = i + 'px';
+        id.style.top = j + 'px';
+    }
+
+    // 
+    function mau() {
+        // tampilkan popup
+        const popup = document.getElementById("popup")
+            popup.style.display = "block";
+
+        // set tulisan popup mau
+        const h2 = document.querySelectorAll("#popup.popup .popup-content h2");
+        h2[0].innerHTML = `Makasih ayang ${nama}`;
+    }
+    // 
+    function closePopup() {
+        // sembunyikan popup
+        document.getElementById("popup").style.display = "none";
+
+        // sembunyikan tombol
+        const btn_gamau = document.getElementById("btn_gamau");
+            btn_gamau.style.display = "none";
+        const btn_mau = document.getElementById("btn_mau");
+            btn_mau.style.display = "none";
+
+        // rubah tulisan
+        const h1 = document.querySelector('h1');
+        h1.innerHTML = `Makasih ayang ${nama}`;
+
+        // tampilkan gambar gif
+        const img = document.getElementById("myImage");
+        img.style.display = "block";
+    }
+</script>
 </html>
