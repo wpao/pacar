@@ -7,11 +7,6 @@ const gak_mau = document.getElementById("btn_gamau");
 const h1 = document.querySelector('h1')
 const img = document.querySelector("#myImage")
 
-// Fungsi untuk menyembunyikan popup saat tombol penutup diklik
-close.onclick = function() {
-  popup.style.display = "none";
-};
-
 // 
 document.getElementById("myForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Mencegah form untuk melakukan submit default
@@ -35,7 +30,7 @@ document.getElementById("myForm").addEventListener("submit", function(event) {
 
 // Fungsi untuk menampilkan popup
 mau.addEventListener("click", function() {
-    h1.innerHTML = `Makasih ${this.name} ayang !`
+    h1.innerHTML = `Makasih ayang !`
     mau.style.display = 'none'
     gak_mau.style.display = 'none'
     img.style.display = 'block'
