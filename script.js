@@ -12,13 +12,6 @@ close.onclick = function() {
   popup.style.display = "none";
 };
 
-// Fungsi untuk menyembunyikan popup saat mengklik di luar area popup
-window.onclick = function(event) {
-  if (event.target == popup) {
-    popup.style.display = "none";
-  }
-};
-
 // 
 document.getElementById("myForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Mencegah form untuk melakukan submit default
